@@ -11,20 +11,21 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-//static files access
+// static files access
 app.use(express.static(path.join(__dirname, './client/build')));
 
 // routes
 app.use('/api/v1/portfolio', require('./routes/portfolioRoute'));
 
-app.get("*", (req, res) => {
-    res.sendFile(path.resolve(__dirname, "client", "build", "index.html"));
-});
+// fallback for SPA
+// app.get("*", (req, res) => {
+//   res.sendFile(path.resolve(__dirname, "client", "build", "index.html"));
+// });
 
 // PORT
 const PORT = process.env.PORT || 8080;
 
 // listen
 app.listen(PORT, () => {
-    console.log(`server running on PORT ${PORT}`);
+    console.log(`Server running on PORT ${PORT}`);
 });
